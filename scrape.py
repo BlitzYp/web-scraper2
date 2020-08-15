@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import random
 
 def get_soup(html):
     soup = BeautifulSoup(html, 'html.parser')
@@ -28,8 +29,15 @@ def clean(html):
     return list(zip(data,authors))
 
 
+def pick_random_quote(quotes):
+    i: int = random.randint(0, len(quotes[0]))
+    res_q: list = list(quotes[0][i])
+    return res_q[0]
+
 def main():
     res = fire_requests()
-    return res
+    data: list = [clean(i) for i in res]
+    q = pick_random_quote(data)
+    return q
 
 print(main())
