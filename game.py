@@ -1,4 +1,7 @@
-def handle_game(data: tuple, hint: str):
+import random
+
+
+def handle_game(data: tuple, date: str, location: str):
     print(data)
     print("Welcome to my quote testing game! Do you have what it takes to beat this game?")
     tries: int = 5
@@ -10,7 +13,8 @@ def handle_game(data: tuple, hint: str):
         else:
             tries -= 1
             print(f'{user_res}: is not correct! Try again!')
-            print(f"Hint: {hint}")
+            print("Hint")
+            print(random.choice([date, location]))
             continue
     else:
         return f'Ahhhh the answer was: {data[1]}...Do you want to play again?: '
