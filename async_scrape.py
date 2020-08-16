@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 import random
 import aiohttp
 import asyncio
-import game
+from game import handle_game
 
 
 def get_soup(html):
@@ -81,7 +81,7 @@ async def main():
     while not play_game == 'no':
         q: tuple = pick_random_quote(res)
         date, location = await hints(q[1])
-        g = game.handle_game(q, date, location)
+        g = handle_game(q, date, location)
         print(g)
         play_game: str = str(input("Do you want to play again?(yes/no): "))
     return print("Thanks for playing!")
