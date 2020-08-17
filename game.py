@@ -2,8 +2,7 @@ import random
 
 
 def handle_game(data: tuple, date: str, location: str):
-    print(data)
-    print("Welcome to my quote testing game! Do you have what it takes to beat this game?")
+    print("Hello there! Today I will test you knowledge about quotes!")
     tries: int = 5
     while tries > 0:
         print(data[0])
@@ -16,5 +15,4 @@ def handle_game(data: tuple, date: str, location: str):
             print("Hint")
             print(random.choice([date, location]))
             continue
-    else:
-        return f'Ahhhh the answer was: {data[1]}...Do you want to play again?: '
+    return f'Ahhhh the answer was: {data[1]}...Do you want to play again?: '

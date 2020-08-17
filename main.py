@@ -22,7 +22,7 @@ async def request(url: str):
         return res
 
 
-def clean(html):
+def clean(html: object):
     soup: BeautifulSoup = get_soup(html)
     q: list = soup.find_all(class_='quote')
     data: list = [i.find(class_='text').get_text() for i in q]
@@ -31,30 +31,19 @@ def clean(html):
 
 
 def pick_random_quote(quotes):
-    rand_page: int = random.randint(0, len(quotes))
-    rand_quote: int = random.randint(0, rand_page)
+    rand_page: int = random.randint(1, 10)
+    rand_quote: int = random.randint(0, 5)
     res_q: list = list(quotes[rand_page][rand_quote])
     return res_q[0], res_q[1]
 
 
-def handle_count(c: int):
-    if c:
-        return c+1
-    return c
-
-
 async def handle_requests():
-    count: int = 1
-    res = await request(f"http://quotes.toscrape.com/page/{count}/")
-    count: int = handle_count(count)
-    return res
-
-
-async def get_data():
     data: list = []
-    for _ in range(11):
-        res = await handle_requests()
+    count: int = 0
+    while count <= 10:
+        res = await request(f"http://quotes.toscrape.com/page/{count}/")
         data.append(clean(res))
+        count += 1
     return data
 
 
@@ -76,7 +65,7 @@ async def hints(author: str):
 
 
 async def main():
-    res: tuple = await get_data()
+    res: tuple = await handle_requests()
     play_game: str = 'yes'
     while not play_game == 'no':
         q: tuple = pick_random_quote(res)
