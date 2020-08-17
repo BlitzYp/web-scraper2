@@ -68,7 +68,7 @@ async def main():
     res: tuple = await handle_requests()
     play_game: str = 'yes'
     while not play_game == 'no':
-        q: tuple = pick_random_quote(res)
+        q: list = pick_random_quote(res)
         date, location = await hints(q[1])
         g = handle_game(q, date, location)
         print(g)
