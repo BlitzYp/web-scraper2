@@ -57,11 +57,9 @@ def scrape_hint(html: object):
 async def hints(author: str):
     name: str = author.replace(" ", '-')
     url: str = f'http://quotes.toscrape.com/author/{name}/'
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            data: object = await resp.text()
-            date, location = scrape_hint(data)
-            return date, location
+    resp = await request(url)
+    date, location = scrape_hint(resp)
+    return date, location
 
 
 async def main():

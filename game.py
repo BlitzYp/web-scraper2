@@ -9,7 +9,7 @@ def handle_game(data: tuple, date: str, location: str):
     while tries > 0:
         print(termcolor.colored(data[0], 'yellow'))
         user_res: str = str(input("Who is the author of this quote?: "))
-        if user_res.lower() in data[1].lower():
+        if user_res.lower() in data[1].lower() and user_res:
             return termcolor.colored(f'You are correct! The author is {data[1]}', 'green')
         else:
             tries -= 1
